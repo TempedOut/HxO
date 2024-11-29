@@ -39,13 +39,13 @@ function rejoin()
     local JobId = game.JobId
 
     if #Players:GetPlayers() <= 1 then
-        queue_on_teleport(callback)
+        queue_on_teleport(loadstring(game:HttpGet("https://raw.githubusercontent.com/TempedOut/HxO/refs/heads/main/HunterXOath.luau", true))())
 
 		Players.LocalPlayer:Kick("\nRejoining...")
 		wait()
 		TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 	else
-        queue_on_teleport(callback)
+        queue_on_teleport(loadstring(game:HttpGet("https://raw.githubusercontent.com/TempedOut/HxO/refs/heads/main/HunterXOath.luau", true))())
 
 		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 	end
