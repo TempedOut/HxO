@@ -509,6 +509,10 @@ function botToMaxNen()
             while not (easyStatCheck("StrengthEXP") >= targetLevel) do
                 task.wait(0.1)
 
+                function checkMeditating()
+                    return game:GetService("Workspace").Living:FindFirstChild(game:GetService("Players").LocalPlayer.Name).Humanoid.Info.Meditating.Value
+                end
+
                 function inStance()
                     return game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("PushupsGui")
                 end
@@ -521,8 +525,22 @@ function botToMaxNen()
 
                         repeat    
                             if bar.Size.X.Scale == 1 then
+                                if checkMeditating() then
+                                    repeat
+                                        task.wait(0.1)
+                                        sendKey(VIM, Enum.KeyCode.M)
+                                    until not checkMeditating()
+                                end
+
                                 sendKey(VIM, Enum.KeyCode.J)
                                 task.wait(1)
+                            else
+                                if not checkMeditating() then
+                                    repeat
+                                        task.wait(0.1)
+                                        sendKey(VIM, Enum.KeyCode.M)
+                                    until checkMeditating()
+                                end
                             end
                             
                             task.wait(0.1)
@@ -607,6 +625,10 @@ function botToMaxNen()
                 end
             end
 
+            function checkMeditating()
+                return game:GetService("Workspace").Living:FindFirstChild(game:GetService("Players").LocalPlayer.Name).Humanoid.Info.Meditating.Value
+            end
+
             while not (easyStatCheck("RunEXP") >= runLevel and easyStatCheck("StaminaEXP") >= staminaLevel) do
                 task.wait(0.1)
 
@@ -614,10 +636,24 @@ function botToMaxNen()
 
                 repeat    
                     if bar.Size.X.Scale == 1 then
+                        if checkMeditating() then
+                            repeat
+                                task.wait(0.1)
+                                sendKey(VIM, Enum.KeyCode.M)
+                            until not checkMeditating()
+                        end
+
                         sprinting(true)
                         task.wait(1)
                     elseif bar.Size.X.Scale <= 0 then
                         sprinting(false)
+
+                        if not checkMeditating() then
+                            repeat
+                                task.wait(0.1)
+                                sendKey(VIM, Enum.KeyCode.M)
+                            until checkMeditating()
+                        end
                     end
                             
                     task.wait(0.1)
