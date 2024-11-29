@@ -897,7 +897,7 @@ function botToMaxNen()
                 end
 
                 --Gyo
-                if (easyStatCheck("MeditationEXP") >= 15000 and easyStatCheck("StrengthEXP") >= 6000 and easyStatCheck("RunEXP") >= 2000 and easyStatCheck("StaminaEXP") >= 3600 and easyStatCheck("RenMastery") >= 10000) then
+                --[[ if (easyStatCheck("MeditationEXP") >= 15000 and easyStatCheck("StrengthEXP") >= 6000 and easyStatCheck("RunEXP") >= 2000 and easyStatCheck("StaminaEXP") >= 3600 and easyStatCheck("RenMastery") >= 10000) then
                     if (easyStatCheck("GyoMastery") < 100000) then
 
                         if not (MSS:HasItem("recievedGyo")) then
@@ -912,7 +912,7 @@ function botToMaxNen()
 
                         trainGyo(false)
                     end
-                end
+                end ]]
 
                 --Zetsu
                 if (easyStatCheck("MeditationEXP") >= 20000 and easyStatCheck("StrengthEXP") >= 8000 and easyStatCheck("RunEXP") >= 3500 and easyStatCheck("StaminaEXP") >= 6000) then
