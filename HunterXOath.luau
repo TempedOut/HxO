@@ -39,10 +39,14 @@ function rejoin()
     local JobId = game.JobId
 
     if #Players:GetPlayers() <= 1 then
+        queue_on_teleport(callback)
+
 		Players.LocalPlayer:Kick("\nRejoining...")
 		wait()
 		TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 	else
+        queue_on_teleport(callback)
+
 		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 	end
 end 
@@ -647,12 +651,21 @@ function botToMaxNen()
         end)
 
         task.spawn(function()
-            function trainAura()
+            function trainAura(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Aura1") then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.N)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Aura1") then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.N)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Aura1") then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.N)
+                        until not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Aura1")
                     end
                 end
             end
@@ -677,72 +690,135 @@ function botToMaxNen()
                 
             end
 
-            function trainRen()
+            function trainRen(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.UsingRen.Value then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.V)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.UsingRen.Value then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.V)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.UsingRen.Value then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.V)
+                        until not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.UsingRen.Value
                     end
                 end
             end
 
-            function trainZetsu()
+            function trainZetsu(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.Zetsu.Value then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.C)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.Zetsu.Value then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.C)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.Zetsu.Value then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.C)
+                        until not WS.Living:FindFirstChild(localPlayer.Name).Humanoid.Info.Zetsu.Value
                     end
                 end
             end
 
-            function trainGyo()
+            function trainGyo(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name).Head:FindFirstChild("LEYE") then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.G)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name).Head:FindFirstChild("LEYE") then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.G)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name).Head:FindFirstChild("LEYE") then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.G)
+                        until not WS.Living:FindFirstChild(localPlayer.Name).Head:FindFirstChild("LEYE")
                     end
                 end
             end
 
-            function trainKen()
+            function trainKen(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Ken") then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.H)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Ken") then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.H)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Ken") then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.H)
+                        until not WS.Living:FindFirstChild(localPlayer.Name).Torso:FindFirstChild("Ken")
                     end
                 end
             end
 
-            function trainKo()
+            function trainKo(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Living:FindFirstChild(localPlayer.Name)["Right Arm"]:FindFirstChild("Ko") then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.X)
+                if onOff then
+                    if not WS.Living:FindFirstChild(localPlayer.Name)["Right Arm"]:FindFirstChild("Ko") then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.X)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name)["Right Arm"]:FindFirstChild("Ko") then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.X)
+                        until not WS.Living:FindFirstChild(localPlayer.Name)["Right Arm"]:FindFirstChild("Ko")
                     end
                 end
             end
 
-            function trainEn()
+            function trainEn(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not WS.Effects:FindFirstChild(localPlayer.Name .. "EnBox") then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.K)
+                if onOff then
+                    if not WS.Effects:FindFirstChild(localPlayer.Name .. "EnBox") then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.K)
+                        end
+                    end
+                else
+                    if WS.Effects:FindFirstChild(localPlayer.Name .. "EnBox") then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.K)
+                        until not WS.Effects:FindFirstChild(localPlayer.Name .. "EnBox")
                     end
                 end
             end
 
-            function trainIn()
+            function trainIn(onOff)
                 local localPlayer = Players.LocalPlayer
 
-                if not (WS.Living:FindFirstChild(localPlayer.Name)["Head"].Transparency > 0) then
-                    if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
-                        sendKey(VIM, Enum.KeyCode.K)
+                if onOff then
+                    if not (WS.Living:FindFirstChild(localPlayer.Name)["Head"].Transparency > 0) then
+                        if WS.Living:FindFirstChild(localPlayer.Name).HumanoidRootPart.Nen.Outline.Container.Bar.Size.X.Scale == 1 then
+                            sendKey(VIM, Enum.KeyCode.P)
+                        end
+                    end
+                else
+                    if WS.Living:FindFirstChild(localPlayer.Name)["Head"].Transparency > 0 then
+                        repeat
+                            task.wait(0.1)
+                            sendKey(VIM, Enum.KeyCode.P)
+                        until not (WS.Living:FindFirstChild(localPlayer.Name)["Head"].Transparency > 0)
                     end
                 end
             end
@@ -777,8 +853,10 @@ function botToMaxNen()
                     if (easyStatCheck("RenMastery") < 100000) then
                         repeat
                             task.wait(0.1)
-                            trainRen()
+                            trainRen(true)
                         until easyStatCheck("RenMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainRen(false)
                     end
                 end
 
@@ -793,8 +871,10 @@ function botToMaxNen()
 
                         repeat
                             task.wait(0.1)
-                            trainGyo()
+                            trainGyo(true)
                         until easyStatCheck("GyoMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainGyo(false)
                     end
                 end
 
@@ -803,8 +883,10 @@ function botToMaxNen()
                     if (easyStatCheck("ZetsuMastery") < 100000) then
                         repeat
                             task.wait(0.1)
-                            trainZetsu()
+                            trainZetsu(true)
                         until easyStatCheck("ZetsuMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainZetsu(false)
                     end
                 end
 
@@ -819,8 +901,10 @@ function botToMaxNen()
 
                         repeat
                             task.wait(0.1)
-                            trainKen()
+                            trainKen(true)
                         until easyStatCheck("KenMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainKen(false)
                     end
                 end
 
@@ -829,8 +913,10 @@ function botToMaxNen()
                     if (easyStatCheck("EnMastery") < 100000) then
                         repeat
                             task.wait(0.1)
-                            trainEn()
+                            trainEn(true)
                         until easyStatCheck("EnMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainEn(false)
                     end
                 end
 
@@ -839,8 +925,10 @@ function botToMaxNen()
                     if (easyStatCheck("InMastery") < 100000) then
                         repeat
                             task.wait(0.1)
-                            trainIn()
+                            trainIn(true)
                         until easyStatCheck("InMastery") >= 100000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainIn(false)
                     end
                 end
 
@@ -849,8 +937,10 @@ function botToMaxNen()
                     if (easyStatCheck("KoMastery") < 1000000) then
                         repeat
                             task.wait(0.1)
-                            trainKo()
+                            trainKo(true)
                         until easyStatCheck("KoMastery") >= 1000000 or not scriptVariables.runTask or not scriptVariables.bottingToMaxNen
+
+                        trainKo(false)
                     end
                 end
             end
