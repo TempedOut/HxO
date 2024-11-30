@@ -58,6 +58,49 @@ function sendKey(VIM ,key, time)
     task.wait(0.1)
 end
 
+--[[ function claimNearestFlag()
+    local localPlayer = Players.LocalPlayer
+    local char = localPlayer.Character
+    local hmrp = char.HumanoidRootPart
+
+    for i, v in pairs(WS.World:GetChildren()) do
+        if (v:FindFirstChild("Flag")) then
+            for m, n in pairs() do
+
+            end
+        end
+    end
+end ]]
+
+function claimAllFlags()
+    local localPlayer = Players.LocalPlayer
+    local char = localPlayer.Character
+    local hmrp = char.HumanoidRootPart
+
+    hmrp.Anchored = true
+
+    for i, v in pairs(WS.World:GetChildren()) do
+
+        if (v:FindFirstChild("Flag")) or (v:FindFirstChild("Flags")) then
+            local flag = v:FindFirstChild("Flag") or v:FindFirstChild("Flags")
+            hmrp.Position = flag["Claimable Flag"].AnimatedFlag.FlagPole.WorldPivot.Position
+            task.wait(0.3)
+            hmrp.Anchored = false
+            task.wait(0.7)
+
+            for m, n in pairs(flag["Claimable Flag"].AnimatedFlag.FlagPole:GetChildren()) do
+                if n:FindFirstChild("Attachment") then
+                    fireproximityprompt(n.Attachment.ProximityPrompt, 3)
+                end
+            end
+
+            hmrp.Anchored = true
+        end
+    end
+
+    hmrp.Anchored = false
+end
+
 function spinClan()
     local localPlayer = Players.LocalPlayer
     local playerGui = localPlayer.PlayerGui
@@ -1173,6 +1216,9 @@ BotGroup:AddButton('Bot To Max Nen', function() botToMaxNen() end)
 
 local SpinGroup = Tabs['Main']:AddLeftGroupbox('Spin Remotes')
 SpinGroup:AddButton('Spin Clan Type', function() spinClan() end)
+
+local FlagsGroup = Tabs['Main']:AddLeftGroupbox('Flags')
+FlagsGroup:AddButton('Claim All Flags', function() claimAllFlags() end)
 
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
