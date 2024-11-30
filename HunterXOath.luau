@@ -76,7 +76,9 @@ function claimAllFlags()
     local localPlayer = Players.LocalPlayer
     local char = localPlayer.Character
     local hmrp = char.HumanoidRootPart
+    local oldLocation = nil
 
+    oldLocation = hmrp.Position
     hmrp.Anchored = true
 
     for i, v in pairs(WS.World:GetChildren()) do
@@ -98,6 +100,9 @@ function claimAllFlags()
         end
     end
 
+    hmrp.Position = oldLocation
+
+    task.wait(0.3)
     hmrp.Anchored = false
 end
 
